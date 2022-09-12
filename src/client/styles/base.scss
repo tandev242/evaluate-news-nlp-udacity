@@ -12,3 +12,8 @@ section {
     max-width: 800px;
     margin: 50px auto;
 }
+
+#results {
+    display: flex;
+    flex-direction: column;
+}

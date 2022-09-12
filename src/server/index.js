@@ -3,7 +3,7 @@ const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
-const axios = require('axios').default
+const fetch = require('node-fetch')
 const FormData = require('form-data')
 dotenv.config()
 const cors = require('cors')
@@ -38,11 +38,10 @@ app.post('/api/check', async function (req, res) {
     form.append("lang", "en")
 
     try {
-        const data = await axios({
-            method: 'post',
-            url: baseURL,
-            data: form
-          })
+        const resp = await fetch(baseURL, {
+        method: 'POST',
+        body: form})
+        const data = await resp.json()
         res.status(200).json({ data })
     } catch (error) {
         res.status(400).json({ error })
